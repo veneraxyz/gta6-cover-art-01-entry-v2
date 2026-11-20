@@ -1,0 +1,279 @@
+/* Vice Cover Studio II — a dark studio around a bright cover. */
+
+@font-face {
+  font-family: 'Anton';
+  src: url('./fonts/Anton-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #0d0a14;
+  --panel: #171226;
+  --panel-2: #1e1830;
+  --line: #2c2342;
+  --text: #f2ecff;
+  --muted: #a99dc4;
+  --coral: #ff5e8a;
+  --aqua: #22e6ff;
+  --gold: #ffd98a;
+}
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- Top bar --- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--line);
+  background: #120d1f;
+}
+
+.brand { display: flex; align-items: center; gap: 12px; }
+
+.brand-mark {
+  font-family: 'Anton', sans-serif;
+  font-size: 30px;
+  line-height: 1;
+  padding: 6px 10px 4px;
+  border-radius: 6px;
+  color: #fff6e8;
+  background: linear-gradient(160deg, #ffb36b, #ff2e88 55%, #7b2ff7);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+.brand h1 {
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  font-size: 21px;
+  letter-spacing: 0.5px;
+  margin: 0;
+  line-height: 1.05;
+}
+
+.brand h1 span { color: var(--coral); }
+
+.brand p { margin: 2px 0 0; color: var(--muted); font-size: 12.5px; }
+
+.top-controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+.segmented {
+  display: flex;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.segmented button {
+  appearance: none;
+  border: 0;
+  background: var(--panel);
+  color: var(--muted);
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.segmented button + button { border-left: 1px solid var(--line); }
+.segmented button:hover { color: var(--text); }
+.segmented button.active { background: var(--coral); color: #fff; font-weight: 600; }
+
+.download {
+  appearance: none;
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-family: 'Anton', sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.6px;
+  color: #160a24;
+  background: linear-gradient(160deg, #ffe9a8, #ffb36b 45%, #ff5e8a);
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(255, 94, 138, 0.35);
+}
+
+.download:hover { filter: brightness(1.07); }
+.download:active { transform: translateY(1px); }
+
+/* --- Studio layout: most of the screen is the live canvas --- */
+.studio {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+.stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px;
+  min-width: 0;
+  background:
+    radial-gradient(900px 500px at 50% 0%, rgba(123, 47, 247, 0.16), transparent 70%),
+    radial-gradient(700px 420px at 85% 100%, rgba(255, 46, 136, 0.12), transparent 70%),
+    #0d0a14;
+}
+
+#cover {
+  max-width: 100%;
+  max-height: calc(100vh - 150px);
+  width: auto;
+  height: auto;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px #000;
+  cursor: grab;
+  touch-action: none;
+  background: #000;
+}
+
+.stage-hint { margin: 0; color: var(--muted); font-size: 12.5px; }
+
+/* --- Control panel --- */
+.panel {
+  width: 330px;
+  flex-shrink: 0;
+  border-left: 1px solid var(--line);
+  background: var(--panel);
+  padding: 18px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.panel h2 {
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 0.8px;
+  margin: 0 0 10px;
+  color: var(--gold);
+}
+
+.panel label { display: block; margin-bottom: 10px; font-size: 13px; color: var(--muted); }
+
+.panel input[type='text'] {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding: 9px 10px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--panel-2);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+}
+
+.panel input[type='text']:focus {
+  outline: 2px solid var(--coral);
+  outline-offset: 0;
+  border-color: var(--coral);
+}
+
+.optional { font-size: 12px; }
+
+.samples { display: flex; gap: 8px; margin-bottom: 10px; }
+
+.sample {
+  appearance: none;
+  flex: 1;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background: var(--panel-2);
+  padding: 5px 5px 6px;
+  cursor: pointer;
+  color: var(--muted);
+  font: inherit;
+  font-size: 11.5px;
+  text-align: center;
+}
+
+.sample canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.sample:hover { color: var(--text); }
+.sample.active { border-color: var(--aqua); color: var(--text); }
+
+.upload { cursor: pointer; }
+
+.upload input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+
+.upload span {
+  display: block;
+  text-align: center;
+  padding: 9px 10px;
+  border: 1px dashed #4a3d6e;
+  border-radius: 7px;
+  color: var(--aqua);
+  font-size: 13px;
+}
+
+.upload span:hover { border-color: var(--aqua); background: rgba(34, 230, 255, 0.06); }
+
+.note { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+
+.zoom-row { display: flex; align-items: center; gap: 10px; }
+
+.zoom-row input[type='range'] { flex: 1; accent-color: var(--coral); }
+.zoom-row output { min-width: 48px; text-align: right; color: var(--text); font-variant-numeric: tabular-nums; }
+
+.secondary {
+  appearance: none;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--panel-2);
+  color: var(--text);
+  padding: 9px 10px;
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.secondary:hover { border-color: var(--coral); }
+
+#status {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 7px;
+  background: rgba(34, 230, 255, 0.07);
+  border: 1px solid rgba(34, 230, 255, 0.25);
+  color: #c9f6ff;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.fineprint { margin: 0; color: #6f648c; font-size: 11.5px; line-height: 1.6; }
+
+@media (max-width: 900px) {
+  .studio { flex-direction: column; }
+  .panel { width: 100%; border-left: 0; border-top: 1px solid var(--line); }
+  #cover { max-height: 70vh; }
+}

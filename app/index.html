@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice Cover Studio II — GTA 6-style cover art, offline</title>
+<meta name="description" content="Turn a photo and a caption into GTA 6-style cover art: a multi-panel Vice City poster with a sunset or neon grade, exported as a PNG. Runs fully offline.">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">VI</span>
+    <div>
+      <h1>VICE COVER STUDIO <span>II</span></h1>
+      <p>Photo + caption &rarr; a Vice City cover. Offline, no watermark.</p>
+    </div>
+  </div>
+  <div class="top-controls">
+    <div class="segmented" role="group" aria-label="Format">
+      <button type="button" data-format="portrait" class="active">Portrait 1080&times;1350</button>
+      <button type="button" data-format="square">Square 1080&times;1080</button>
+      <button type="button" data-format="landscape">Wide 1920&times;1080</button>
+    </div>
+    <div class="segmented" role="group" aria-label="Grade">
+      <button type="button" data-grade="sunset" class="active">Sunset</button>
+      <button type="button" data-grade="neon">Neon</button>
+    </div>
+    <button id="download" type="button" class="download">Download PNG</button>
+  </div>
+</header>
+
+<main class="studio">
+  <section class="stage" aria-label="Cover preview">
+    <canvas id="cover" width="1080" height="1350" aria-label="The cover"></canvas>
+    <p class="stage-hint">Drag the big photo to reframe it &middot; scroll on the cover to zoom</p>
+  </section>
+
+  <aside class="panel" aria-label="Cover controls">
+    <section>
+      <h2>1 &middot; Photo</h2>
+      <div class="samples">
+        <button type="button" data-sample="queen" class="sample active">
+          <canvas width="96" height="120" aria-hidden="true"></canvas>
+          <span>Boulevard Queen</span>
+        </button>
+        <button type="button" data-sample="rider" class="sample">
+          <canvas width="96" height="120" aria-hidden="true"></canvas>
+          <span>Midnight Run</span>
+        </button>
+        <button type="button" data-sample="heist" class="sample">
+          <canvas width="96" height="120" aria-hidden="true"></canvas>
+          <span>Sunset Heist</span>
+        </button>
+      </div>
+      <label class="upload">
+        <input id="upload" type="file" accept="image/*">
+        <span>Use your own photo&hellip;</span>
+      </label>
+      <p class="note">Your photo stays on this machine — nothing is uploaded.</p>
+    </section>
+
+    <section>
+      <h2>2 &middot; Caption</h2>
+      <label>Headline
+        <input id="caption" type="text" maxlength="42" value="BOULEVARD QUEEN" autocomplete="off">
+      </label>
+      <label>Subtitle <span class="optional">(optional)</span>
+        <input id="subtitle" type="text" maxlength="30" value="VICE CITY" autocomplete="off">
+      </label>
+    </section>
+
+    <section>
+      <h2>3 &middot; Reframe</h2>
+      <label class="zoom-row">Zoom
+        <input id="zoom" type="range" min="1" max="3" step="0.05" value="1">
+        <output id="zoomVal">1.00&times;</output>
+      </label>
+      <p class="note">Drag the hero photo on the cover to move it. The crop carries across formats.</p>
+      <button id="swap" type="button" class="secondary">Swap supporting scenes</button>
+    </section>
+
+    <p id="status" role="status">Sample loaded — edit the caption or drop in your own photo.</p>
+    <p class="fineprint">A fan-made cover tool. Not affiliated with Rockstar Games. Lettering in Anton (SIL OFL), bundled locally. Every scene is drawn in code — no stock photos.</p>
+  </aside>
+</main>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
